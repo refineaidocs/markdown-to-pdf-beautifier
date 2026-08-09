@@ -101,6 +101,7 @@ This demo loads the following browser libraries from public CDNs. Their original
 | [html2canvas](https://github.com/niklasvh/html2canvas) | 1.4.1 | [MIT](https://github.com/niklasvh/html2canvas/blob/master/LICENSE) |
 | [JSZip](https://github.com/Stuk/jszip) | 3.10.1 | [MIT](https://github.com/Stuk/jszip/blob/main/LICENSE.txt) |
 | [pdf-lib](https://github.com/Hopding/pdf-lib) | 1.17.1 | [MIT](https://github.com/Hopding/pdf-lib/blob/master/LICENSE.md) |
+| [PDF/UA Check](https://www.pdfuacheck.com) |  | The PDF/UA Format Support  |
 
 The **Technology** theme is an original visual treatment in this demo.
 
