@@ -48,10 +48,6 @@ flowchart LR
 ## Preview
 
 <p align="center">
-  <img src="assets/publisher/publisher-main.png" width="92%" alt="Refine AI Publisher product interface">
-</p>
-
-<p align="center">
   <img src="assets/publisher/publisher-md-source.png" width="45%" alt="Structured Markdown source preview">
   <img src="assets/publisher/publisher-md-output.png" width="45%" alt="Polished document output preview">
 </p>
