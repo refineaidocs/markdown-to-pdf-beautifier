@@ -48,17 +48,8 @@ flowchart LR
 ## Preview
 
 <p align="center">
-  <img src="assets/publisher/publisher-md-source.png" width="45%" alt="Structured Markdown source preview">
-  <img src="assets/publisher/publisher-md-output.png" width="45%" alt="Polished document output preview">
-</p>
-
-### More product preview images
-
-<p align="center">
-  <img src="assets/publisher/publisher-demo-01.png" width="45%" alt="AI enhancement overview">
-  <img src="assets/publisher/publisher-demo-02.png" width="45%" alt="Quality trends and workflow">
-  <img src="assets/publisher/publisher-enhance-panel.png" width="45%" alt="Enhancement controls">
-  <img src="assets/publisher/publisher-table-report.png" width="45%" alt="Structured table report">
+  <img src="assets/Publisher-Make-Markdown-feel-new-page-01.png" width="45%">
+  <img src="assets/Publisher-Make-Markdown-feel-new-page-02.png" width="45%">
 </p>
 
 ## Run Locally
