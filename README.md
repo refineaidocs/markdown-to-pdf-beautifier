@@ -103,7 +103,5 @@ This demo loads the following browser libraries from public CDNs. Their original
 | [pdf-lib](https://github.com/Hopding/pdf-lib) | 1.17.1 | [MIT](https://github.com/Hopding/pdf-lib/blob/master/LICENSE.md) |
 | [PDF/UA Check](https://www.pdfuacheck.com) |  | The PDF/UA Format Support  |
 
-The **Technology** theme is an original visual treatment in this demo.
-
 When a user supplies a GitHub URL, the linked Markdown is user-selected content. The original author remains responsible for that content; no GitHub affiliation, endorsement, or authorization is implied.
 
