@@ -19,6 +19,8 @@
 
 ## Live Demo
 
+[Demo: Refine AI Docs](https://refineaidocs.com/publisher/demo/)
+
 You can open `index.html` directly for upload and handwritten Markdown, or publish this folder with GitHub Pages. For URL input and the most reliable browser behavior, use a static server. The default source is a public Markdown README.
 
 The demo does not upload document content to a conversion server. Markdown is rendered in the browser. External rendering libraries are loaded from public CDNs when the page starts.
