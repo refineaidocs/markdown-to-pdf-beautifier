@@ -99,6 +99,14 @@
     .style-thumb.modern i { background: #62d8c1; }
     .style-thumb.modern b { background: #f4f7fb; }
     .style-thumb.modern em { background: #71819b; }
+    .style-thumb.swiss { background: #fff; border-color: #171717; }
+    .style-thumb.swiss i { background: #e6392f; }
+    .style-thumb.swiss b { background: #171717; }
+    .style-thumb.swiss em { background: #c8c8c8; }
+    .style-thumb.academic { background: #fbfaf7; border-color: #d9d0c5; }
+    .style-thumb.academic i { background: #8c3f2f; }
+    .style-thumb.academic b { background: #27231f; }
+    .style-thumb.academic em { background: #c8bcae; }
     .convert {
       display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; min-height: 46px; margin-top: 25px;
       border: 0; border-radius: 8px; background: var(--accent); color: #fff; font-weight: 800; font-size: 13px;
@@ -134,6 +142,8 @@
     }
     .paper[data-style="modern"] { --paper-ink: #ecf2f8; --paper-muted: #a9b7c7; --paper-line: #304158; --paper-accent: #62d8c1; --paper-soft: #1b2a3d; background: #142033; }
     .paper[data-style="technology"], .export-page[data-style="technology"] { --paper-ink: #24292f; --paper-muted: #57606a; --paper-line: #d0d7de; --paper-accent: #0969da; --paper-soft: #f6f8fa; background: #fff; }
+    .paper[data-style="swiss"], .export-page[data-style="swiss"] { --paper-ink: #171717; --paper-muted: #505050; --paper-line: #d6d6d6; --paper-accent: #e6392f; --paper-soft: #f1f1ef; background: #fff; }
+    .paper[data-style="academic"], .export-page[data-style="academic"] { --paper-ink: #27231f; --paper-muted: #665f57; --paper-line: #d9d0c5; --paper-accent: #8c3f2f; --paper-soft: #f3eee7; background: #fbfaf7; }
     .paper[data-style="before"] { --paper-ink: #26333e; --paper-muted: #52606d; --paper-line: #d9dee4; --paper-accent: #71808d; --paper-soft: #f3f5f7; background: #fff; }
     .paper::before { content: "AFTER  •  REFINED HTML PREVIEW"; display: block; margin-bottom: 35px; color: var(--paper-accent); font-size: 10px; font-weight: 850; letter-spacing: .16em; }
     .paper[data-view="before"] { box-shadow: 0 12px 32px rgba(25, 37, 49, .09); }
@@ -188,6 +198,58 @@
     .paper[data-style="technology"] .rendered a, .export-page[data-style="technology"] .export-rendered a { color: #0969da; }
     .paper[data-style="technology"] .rendered hr, .export-page[data-style="technology"] .export-rendered hr { height: 3px; border: 0; border-radius: 2px; background: #d0d7de; }
     .paper[data-style="technology"] .rendered .mermaid, .export-page[data-style="technology"] .export-rendered .mermaid { background: #f6f8fa; border-color: #d0d7de; }
+    .paper[data-style="swiss"] .rendered, .export-page[data-style="swiss"] .export-rendered { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
+    .paper[data-style="swiss"] .rendered h1, .export-page[data-style="swiss"] .export-rendered h1 { max-width: none; padding: 14px 0 15px 18px; border-top: 8px solid #171717; border-bottom: 2px solid #e6392f; color: #171717; font-size: 40px; font-weight: 800; letter-spacing: .01em; line-height: 1.08; }
+    .paper[data-style="swiss"] .rendered h2, .export-page[data-style="swiss"] .export-rendered h2 { margin-top: 34px; padding: 0 0 9px 12px; border-bottom: 2px solid #171717; border-left: 5px solid #e6392f; color: #171717; font-size: 23px; font-weight: 800; }
+    .paper[data-style="swiss"] .rendered h3, .export-page[data-style="swiss"] .export-rendered h3 { color: #171717; font-size: 16px; font-weight: 800; }
+    .paper[data-style="swiss"] .rendered p, .paper[data-style="swiss"] .rendered li, .export-page[data-style="swiss"] .export-rendered p, .export-page[data-style="swiss"] .export-rendered li { color: #303030; line-height: 1.55; }
+    .paper[data-style="swiss"] .rendered blockquote, .export-page[data-style="swiss"] .export-rendered blockquote { border-left-width: 7px; border-left-color: #e6392f; background: #f1f1ef; color: #505050; }
+    .paper[data-style="swiss"] .rendered pre, .export-page[data-style="swiss"] .export-rendered pre { border: 0; border-radius: 0; background: #171717; color: #f5f5f5; }
+    .paper[data-style="swiss"] .rendered table, .export-page[data-style="swiss"] .export-rendered table { border: 1px solid #171717; }
+    .paper[data-style="swiss"] .rendered th, .export-page[data-style="swiss"] .export-rendered th { border: 1px solid #171717; border-bottom: 1px solid #171717; background: #171717; color: #fff; }
+    .paper[data-style="swiss"] .rendered td, .export-page[data-style="swiss"] .export-rendered td { border: 1px solid #d6d6d6; color: #303030; }
+    .paper[data-style="swiss"] .rendered tbody tr:nth-child(even), .export-page[data-style="swiss"] .export-rendered tbody tr:nth-child(even) { background: #f1f1ef; }
+    .paper[data-style="swiss"] .rendered a, .export-page[data-style="swiss"] .export-rendered a { color: #c52d25; font-weight: 700; }
+    .paper[data-style="swiss"] .rendered hr, .export-page[data-style="swiss"] .export-rendered hr { height: 5px; border: 0; background: #e6392f; }
+    .paper[data-style="academic"] .rendered, .export-page[data-style="academic"] .export-rendered { font-family: Georgia, "Times New Roman", serif; }
+    .paper[data-style="academic"] .rendered h1, .export-page[data-style="academic"] .export-rendered h1 { max-width: none; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #8c3f2f; color: #27231f; font: 700 43px/1.12 Georgia, "Times New Roman", serif; }
+    .paper[data-style="academic"] .rendered h2, .export-page[data-style="academic"] .export-rendered h2 { margin-top: 38px; padding-bottom: 8px; border-bottom: 1px solid #d9d0c5; color: #8c3f2f; font: 700 25px/1.2 Georgia, "Times New Roman", serif; }
+    .paper[data-style="academic"] .rendered h3, .export-page[data-style="academic"] .export-rendered h3 { color: #27231f; font: 700 17px/1.3 Georgia, "Times New Roman", serif; }
+    .paper[data-style="academic"] .rendered p, .paper[data-style="academic"] .rendered li, .export-page[data-style="academic"] .export-rendered p, .export-page[data-style="academic"] .export-rendered li { color: #4f4840; font-size: 16px; line-height: 1.78; }
+    .paper[data-style="academic"] .rendered blockquote, .export-page[data-style="academic"] .export-rendered blockquote { margin: 28px 24px; padding: 12px 20px; border-left-color: #8c3f2f; background: #f3eee7; font-style: italic; }
+    .paper[data-style="academic"] .rendered code, .export-page[data-style="academic"] .export-rendered code { color: #8c3f2f; background: #eee7de; }
+    .paper[data-style="academic"] .rendered pre, .export-page[data-style="academic"] .export-rendered pre { border-color: #d9d0c5; background: #eee7de; color: #332e29; }
+    .paper[data-style="academic"] .rendered th, .export-page[data-style="academic"] .export-rendered th { border-bottom-color: #8c3f2f; font: 700 13px/1.3 Georgia, "Times New Roman", serif; }
+    .paper[data-style="academic"] .rendered td, .export-page[data-style="academic"] .export-rendered td { color: #5d554c; }
+    .paper[data-style="academic"] .rendered a, .export-page[data-style="academic"] .export-rendered a { color: #8c3f2f; }
+    .paper[data-style="academic"] .rendered hr, .export-page[data-style="academic"] .export-rendered hr { height: 1px; border: 0; background: #8c3f2f; }
+    /* README presentation enhancement: each recognizable header part can improve independently. */
+    .readme-header-enhanced .readme-hero { margin: 0 0 20px; text-align: center; }
+    .readme-header-enhanced .readme-hero img {
+      width: min(100%, 520px); height: 180px; margin: 0 auto; object-fit: contain; object-position: center;
+    }
+    .readme-header-enhanced .readme-title {
+      max-width: none; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 2px solid var(--paper-accent);
+      font-size: 38px; line-height: 1.15;
+    }
+    .readme-header-enhanced .readme-badge-group {
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 24px;
+    }
+    .readme-header-enhanced .readme-badge-group > a { display: block; }
+    .readme-header-enhanced .readme-badge-group img {
+      display: block; width: auto; height: 22px; max-width: 100%; object-fit: contain;
+    }
+    .readme-header-enhanced .readme-lead {
+      margin-bottom: 24px; color: var(--paper-ink); font-size: 16px; line-height: 1.62;
+    }
+    .readme-header-enhanced .readme-disclaimer {
+      margin: 24px 0 31px; padding: 13px 16px; border-left: 4px solid var(--paper-muted); background: var(--paper-soft); color: var(--paper-muted);
+    }
+    .readme-header-enhanced .readme-disclaimer strong { color: var(--paper-ink); }
+    .export-page .readme-header-enhanced .readme-hero img { height: 150px; }
+    .export-page .readme-header-enhanced .readme-title { font-size: 34px; }
+    .export-page .readme-header-enhanced .readme-badge-group img { height: 18px; }
+    .export-page .readme-header-enhanced .readme-lead { font-size: 13px; }
     .empty { padding: 50px 0; color: var(--paper-muted); text-align: center; }
     .error { color: #b42318; }
 
@@ -354,6 +416,8 @@
         <option value="editorial" data-i18n="styleEditorial">Bright - Editorial</option>
         <option value="modern" data-i18n="styleModern">Dark - Modern Report</option>
         <option value="technology" data-i18n="styleTechnology">Technology</option>
+        <option value="swiss" data-i18n="styleSwiss">Swiss Grid</option>
+        <option value="academic" data-i18n="styleAcademic">Academic Paper</option>
       </select>
       <button id="convert" class="convert" type="button"><span aria-hidden="true">&#9654;</span> <span data-i18n="convert">Convert to HTML preview</span></button>
       <div class="export-actions" aria-label="Local export">
@@ -572,6 +636,56 @@
         });
       }
 
+      function isReadmeBadgeBlock(element) {
+        if (!element || element.tagName !== 'P') return false;
+        const images = [...element.querySelectorAll(':scope > a > img, :scope > img')];
+        if (!images.length || element.querySelectorAll('img').length !== images.length) return false;
+        if (element.textContent.trim()) return false;
+        return images.every((image) => /(?:shields\.io|\/badge\.svg(?:\?|$)|actions\/workflows\/[^/]+\/badge\.svg)/i.test(image.getAttribute('src') || ''));
+      }
+
+      // Keep this deliberately structural: recognizable parts can improve independently; prose is never rewritten.
+      function enhanceReadmeHeader(root) {
+        const children = [...root.children];
+        const title = children.find((element) => element.tagName === 'H1');
+        const hero = children.find((element) => element.tagName === 'P' && element.querySelectorAll(':scope > img').length === 1 && !element.textContent.trim());
+        let headerSignal = false;
+        if (hero && (!title || hero.compareDocumentPosition(title) & Node.DOCUMENT_POSITION_FOLLOWING)) {
+          hero.classList.add('readme-hero');
+          headerSignal = true;
+        }
+        const badges = [];
+        let badgeCandidate = title?.nextElementSibling;
+        while (badgeCandidate && badges.length < 8 && isReadmeBadgeBlock(badgeCandidate)) {
+          badges.push(badgeCandidate);
+          badgeCandidate = badgeCandidate.nextElementSibling;
+        }
+        const group = badges.length ? document.createElement('div') : null;
+        if (group && title) {
+          group.className = 'readme-badge-group';
+          badges.forEach((badge) => {
+            while (badge.firstChild) group.append(badge.firstChild);
+            badge.remove();
+          });
+          title.after(group);
+          headerSignal = true;
+        }
+        const lead = group?.nextElementSibling || title?.nextElementSibling;
+        if (lead?.tagName === 'P' && !isReadmeBadgeBlock(lead)) {
+          lead.classList.add('readme-lead');
+        }
+        const disclaimer = [...root.children].find((element) => element.tagName === 'P' && /^\s*Disclaimer\s*:/i.test(element.textContent || ''));
+        if (disclaimer) {
+          disclaimer.classList.add('readme-disclaimer');
+          headerSignal = true;
+        }
+        if (headerSignal) {
+          root.classList.add('readme-header-enhanced');
+          title?.classList.add('readme-title');
+          if (lead?.tagName === 'P') lead.classList.add('readme-lead');
+        }
+      }
+
       async function enhanceAfterHtml(root) {
         markGfmAlerts(root);
         prepareMermaidBlocks(root);
@@ -601,6 +715,7 @@
         const rawHTML = window.marked.parse(source, { gfm: true, breaks: false, headerIds: false, mangle: false });
         currentSourceHTML = sanitizeHtml(rawHTML);
         rendered.innerHTML = currentSourceHTML;
+        enhanceReadmeHeader(rendered);
         await enhanceAfterHtml(rendered);
         currentHTML = rendered.innerHTML;
         meta.textContent = source.length.toLocaleString() + ' characters  •  GFM + Mermaid + KaTeX';
@@ -764,7 +879,7 @@
 
       function capturePage(page) {
         return window.html2canvas(page, {
-          backgroundColor: page.dataset.style === 'modern' ? '#142033' : '#ffffff',
+          backgroundColor: page.dataset.style === 'modern' ? '#142033' : page.dataset.style === 'academic' ? '#fbfaf7' : '#ffffff',
           scale: EXPORT_SCALE,
           useCORS: true,
           allowTaint: false,
@@ -938,10 +1053,10 @@
     (() => {
       const copy = {
         en: {
-          navTool: 'Markdown Tool', navProduct: 'Product', toolSubtitle: 'Markdown to PDF preview', toolEyebrow: 'Source', toolTitle: 'Turn Markdown into a polished document', inputLabel: 'Input', inputUrl: 'URL', inputUpload: 'Upload Markdown file', inputText: 'Write Markdown', chooseFile: 'Choose a Markdown file', urlHint: 'Use a raw Markdown URL. GitHub blob links are converted automatically when you click Convert.', styleLabel: 'After style', styleEditorial: 'Bright - Editorial', styleModern: 'Dark - Modern Report', styleTechnology: 'Technology', convert: 'Convert to HTML preview', downloadImages: 'Download A4 images', downloadPdf: 'Download PDF', exportNote: 'Exports the After style locally. A4 images are packaged in one ZIP; the PDF uses the same images.', resultTitle: 'Converted result', resultLead: 'Preview locally, then export A4 images or a PDF from the After style.', before: 'Before', after: 'After', productEyebrow: 'Refine AI Publisher for macOS', productTitle: 'Write in Markdown. Export like a professional.', productLead: 'Turn drafts into finished PDFs with AI-enhanced previews, template-based layouts, smart tables, charts, covers, and export-ready document styles.', downloadMac: 'Download for macOS', subscribe: 'Subscribe', productMeta: 'Markdown, PDF, tables, charts', demoEyebrow: 'Publisher product preview', demoTitle: 'See the difference between a draft and a finished document.', demoLead: 'Publisher combines structured source material with controlled layouts, tables, charts, covers, and AI enhancement previews.', sourceCaption: 'Structured source material', outputCaption: 'A polished, export-ready result', featuresEyebrow: 'Publication features', featuresTitle: 'Turn raw content into a designed document.', feature1Title: 'Markdown to PDF', feature1Body: 'Write structured content and export a finished PDF with layout choices already applied.', feature2Title: 'AI enhancement preview', feature2Body: 'Review improved structure, headings, tables, and presentation before applying changes.', feature3Title: 'Tables and charts', feature3Body: 'Turn raw tables into clearer visual reports and publishable data sections.', feature4Title: 'Templates and covers', feature4Body: 'Apply consistent themes, page styles, and covers to reports, guides, and proposals.', screensEyebrow: 'Interface preview', screensTitle: 'Designed for export-ready document production.', galleryCaption1: 'AI enhancement overview', galleryCaption2: 'Quality trends and workflow', galleryCaption3: 'Enhancement controls', galleryCaption4: 'Structured table reporting', ctaTitle: 'Ready to publish better documents?', ctaBody: 'Download Publisher for macOS or manage your membership online.', manageMembership: 'Manage membership', officialSite: 'Official website', productImageAlt: 'Refine AI Publisher interface', sourceImageAlt: 'Markdown source document', outputImageAlt: 'Refined PDF output', galleryAlt1: 'AI enhancement overview', galleryAlt2: 'Quality trends', galleryAlt3: 'Enhancement controls', galleryAlt4: 'Table report'
+          navTool: 'Markdown Tool', navProduct: 'Product', toolSubtitle: 'Markdown to PDF preview', toolEyebrow: 'Source', toolTitle: 'Turn Markdown into a polished document', inputLabel: 'Input', inputUrl: 'URL', inputUpload: 'Upload Markdown file', inputText: 'Write Markdown', chooseFile: 'Choose a Markdown file', urlHint: 'Use a raw Markdown URL. GitHub blob links are converted automatically when you click Convert.', styleLabel: 'After style', styleEditorial: 'Bright - Editorial', styleModern: 'Dark - Modern Report', styleTechnology: 'Technology', styleSwiss: 'Swiss Grid', styleAcademic: 'Academic Paper', convert: 'Convert to HTML preview', downloadImages: 'Download A4 images', downloadPdf: 'Download PDF', exportNote: 'Exports the After style locally. A4 images are packaged in one ZIP; the PDF uses the same images.', resultTitle: 'Converted result', resultLead: 'Preview locally, then export A4 images or a PDF from the After style.', before: 'Before', after: 'After', productEyebrow: 'Refine AI Publisher for macOS', productTitle: 'Write in Markdown. Export like a professional.', productLead: 'Turn drafts into finished PDFs with AI-enhanced previews, template-based layouts, smart tables, charts, covers, and export-ready document styles.', downloadMac: 'Download for macOS', subscribe: 'Subscribe', productMeta: 'Markdown, PDF, tables, charts', demoEyebrow: 'Publisher product preview', demoTitle: 'See the difference between a draft and a finished document.', demoLead: 'Publisher combines structured source material with controlled layouts, tables, charts, covers, and AI enhancement previews.', sourceCaption: 'Structured source material', outputCaption: 'A polished, export-ready result', featuresEyebrow: 'Publication features', featuresTitle: 'Turn raw content into a designed document.', feature1Title: 'Markdown to PDF', feature1Body: 'Write structured content and export a finished PDF with layout choices already applied.', feature2Title: 'AI enhancement preview', feature2Body: 'Review improved structure, headings, tables, and presentation before applying changes.', feature3Title: 'Tables and charts', feature3Body: 'Turn raw tables into clearer visual reports and publishable data sections.', feature4Title: 'Templates and covers', feature4Body: 'Apply consistent themes, page styles, and covers to reports, guides, and proposals.', screensEyebrow: 'Interface preview', screensTitle: 'Designed for export-ready document production.', galleryCaption1: 'AI enhancement overview', galleryCaption2: 'Quality trends and workflow', galleryCaption3: 'Enhancement controls', galleryCaption4: 'Structured table reporting', ctaTitle: 'Ready to publish better documents?', ctaBody: 'Download Publisher for macOS or manage your membership online.', manageMembership: 'Manage membership', officialSite: 'Official website', productImageAlt: 'Refine AI Publisher interface', sourceImageAlt: 'Markdown source document', outputImageAlt: 'Refined PDF output', galleryAlt1: 'AI enhancement overview', galleryAlt2: 'Quality trends', galleryAlt3: 'Enhancement controls', galleryAlt4: 'Table report'
         },
         de: {
-          navTool: 'Markdown-Werkzeug', navProduct: 'Produkt', toolSubtitle: 'Markdown-zu-PDF-Vorschau', toolEyebrow: 'Quelle', toolTitle: 'Markdown in ein gestaltetes Dokument verwandeln', inputLabel: 'Eingabe', inputUrl: 'URL', inputUpload: 'Markdown-Datei hochladen', inputText: 'Markdown schreiben', chooseFile: 'Markdown-Datei auswählen', urlHint: 'Verwenden Sie eine rohe Markdown-URL. GitHub-Blob-Links werden beim Konvertieren automatisch umgewandelt.', styleLabel: 'After-Stil', styleEditorial: 'Hell - Editorial', styleModern: 'Dunkel - Moderner Bericht', styleTechnology: 'Technologie', convert: 'In HTML-Vorschau umwandeln', downloadImages: 'A4-Bilder herunterladen', downloadPdf: 'PDF herunterladen', exportNote: 'Der After-Stil wird lokal exportiert. A4-Bilder werden als ZIP gebündelt; das PDF verwendet dieselben Bilder.', resultTitle: 'Konvertiertes Ergebnis', resultLead: 'Lokal prüfen und anschließend A4-Bilder oder ein PDF aus dem After-Stil exportieren.', before: 'Vorher', after: 'Nachher', productEyebrow: 'Refine AI Publisher für macOS', productTitle: 'In Markdown schreiben. Professionell exportieren.', productLead: 'Entwürfe mit KI-Vorschauen, vorlagenbasierten Layouts, intelligenten Tabellen, Diagrammen, Covern und exportfertigem Styling in fertige PDFs verwandeln.', downloadMac: 'macOS laden', subscribe: 'Abonnieren', productMeta: 'Markdown, PDF, Tabellen, Diagramme', demoEyebrow: 'Publisher-Produktvorschau', demoTitle: 'Den Unterschied zwischen Entwurf und fertigem Dokument sehen.', demoLead: 'Publisher verbindet strukturierte Inhalte mit kontrollierten Layouts, Tabellen, Diagrammen, Covern und KI-Vorschauen.', sourceCaption: 'Strukturierter Quellinhalt', outputCaption: 'Gestaltetes, exportfertiges Ergebnis', featuresEyebrow: 'Publikationsfunktionen', featuresTitle: 'Rohen Inhalt in ein gestaltetes Dokument verwandeln.', feature1Title: 'Markdown zu PDF', feature1Body: 'Strukturierte Inhalte schreiben und ein fertiges PDF mit Layoutentscheidungen exportieren.', feature2Title: 'KI-Vorschau', feature2Body: 'Verbesserte Struktur, Überschriften, Tabellen und Präsentation vor der Übernahme prüfen.', feature3Title: 'Tabellen und Diagramme', feature3Body: 'Rohe Tabellen in klare visuelle Berichte und veröffentlichbare Datenabschnitte verwandeln.', feature4Title: 'Vorlagen und Cover', feature4Body: 'Einheitliche Themen, Seitenstile und Cover für Berichte, Leitfäden und Angebote anwenden.', screensEyebrow: 'Oberflächenvorschau', screensTitle: 'Für exportfertige Dokumentproduktion entwickelt.', galleryCaption1: 'Übersicht der KI-Verbesserung', galleryCaption2: 'Qualitätstrends und Ablauf', galleryCaption3: 'Steuerung der Verbesserung', galleryCaption4: 'Strukturierter Tabellenbericht', ctaTitle: 'Bereit für bessere Dokumente?', ctaBody: 'Publisher für macOS laden oder Ihre Mitgliedschaft online verwalten.', manageMembership: 'Mitgliedschaft verwalten', officialSite: 'Offizielle Website', productImageAlt: 'Refine AI Publisher Oberfläche', sourceImageAlt: 'Markdown-Quelldokument', outputImageAlt: 'Verbessertes PDF-Ergebnis', galleryAlt1: 'KI-Verbesserungsübersicht', galleryAlt2: 'Qualitätstrends', galleryAlt3: 'Steuerung der Verbesserung', galleryAlt4: 'Tabellenbericht'
+          navTool: 'Markdown-Werkzeug', navProduct: 'Produkt', toolSubtitle: 'Markdown-zu-PDF-Vorschau', toolEyebrow: 'Quelle', toolTitle: 'Markdown in ein gestaltetes Dokument verwandeln', inputLabel: 'Eingabe', inputUrl: 'URL', inputUpload: 'Markdown-Datei hochladen', inputText: 'Markdown schreiben', chooseFile: 'Markdown-Datei auswählen', urlHint: 'Verwenden Sie eine rohe Markdown-URL. GitHub-Blob-Links werden beim Konvertieren automatisch umgewandelt.', styleLabel: 'After-Stil', styleEditorial: 'Hell - Editorial', styleModern: 'Dunkel - Moderner Bericht', styleTechnology: 'Technologie', styleSwiss: 'Swiss Grid', styleAcademic: 'Akademisches Papier', convert: 'In HTML-Vorschau umwandeln', downloadImages: 'A4-Bilder herunterladen', downloadPdf: 'PDF herunterladen', exportNote: 'Der After-Stil wird lokal exportiert. A4-Bilder werden als ZIP gebündelt; das PDF verwendet dieselben Bilder.', resultTitle: 'Konvertiertes Ergebnis', resultLead: 'Lokal prüfen und anschließend A4-Bilder oder ein PDF aus dem After-Stil exportieren.', before: 'Vorher', after: 'Nachher', productEyebrow: 'Refine AI Publisher für macOS', productTitle: 'In Markdown schreiben. Professionell exportieren.', productLead: 'Entwürfe mit KI-Vorschauen, vorlagenbasierten Layouts, intelligenten Tabellen, Diagrammen, Covern und exportfertigem Styling in fertige PDFs verwandeln.', downloadMac: 'macOS laden', subscribe: 'Abonnieren', productMeta: 'Markdown, PDF, Tabellen, Diagramme', demoEyebrow: 'Publisher-Produktvorschau', demoTitle: 'Den Unterschied zwischen Entwurf und fertigem Dokument sehen.', demoLead: 'Publisher verbindet strukturierte Inhalte mit kontrollierten Layouts, Tabellen, Diagrammen, Covern und KI-Vorschauen.', sourceCaption: 'Strukturierter Quellinhalt', outputCaption: 'Gestaltetes, exportfertiges Ergebnis', featuresEyebrow: 'Publikationsfunktionen', featuresTitle: 'Rohen Inhalt in ein gestaltetes Dokument verwandeln.', feature1Title: 'Markdown zu PDF', feature1Body: 'Strukturierte Inhalte schreiben und ein fertiges PDF mit Layoutentscheidungen exportieren.', feature2Title: 'KI-Vorschau', feature2Body: 'Verbesserte Struktur, Überschriften, Tabellen und Präsentation vor der Übernahme prüfen.', feature3Title: 'Tabellen und Diagramme', feature3Body: 'Rohe Tabellen in klare visuelle Berichte und veröffentlichbare Datenabschnitte verwandeln.', feature4Title: 'Vorlagen und Cover', feature4Body: 'Einheitliche Themen, Seitenstile und Cover für Berichte, Leitfäden und Angebote anwenden.', screensEyebrow: 'Oberflächenvorschau', screensTitle: 'Für exportfertige Dokumentproduktion entwickelt.', galleryCaption1: 'Übersicht der KI-Verbesserung', galleryCaption2: 'Qualitätstrends und Ablauf', galleryCaption3: 'Steuerung der Verbesserung', galleryCaption4: 'Strukturierter Tabellenbericht', ctaTitle: 'Bereit für bessere Dokumente?', ctaBody: 'Publisher für macOS laden oder Ihre Mitgliedschaft online verwalten.', manageMembership: 'Mitgliedschaft verwalten', officialSite: 'Offizielle Website', productImageAlt: 'Refine AI Publisher Oberfläche', sourceImageAlt: 'Markdown-Quelldokument', outputImageAlt: 'Verbessertes PDF-Ergebnis', galleryAlt1: 'KI-Verbesserungsübersicht', galleryAlt2: 'Qualitätstrends', galleryAlt3: 'Steuerung der Verbesserung', galleryAlt4: 'Tabellenbericht'
         },
         es: {
           navTool: 'Herramienta Markdown', navProduct: 'Producto', toolSubtitle: 'Vista previa de Markdown a PDF', toolEyebrow: 'Fuente', toolTitle: 'Convierte Markdown en un documento pulido', inputLabel: 'Entrada', inputUrl: 'URL', inputUpload: 'Subir archivo Markdown', inputText: 'Escribir Markdown', chooseFile: 'Elegir un archivo Markdown', urlHint: 'Usa una URL de Markdown sin formato. Los enlaces blob de GitHub se convierten automáticamente al pulsar Convertir.', styleLabel: 'Estilo After', styleEditorial: 'Claro - Editorial', styleModern: 'Oscuro - Informe moderno', styleTechnology: 'Tecnología', convert: 'Convertir a vista previa HTML', downloadImages: 'Descargar imágenes A4', downloadPdf: 'Descargar PDF', exportNote: 'El estilo After se exporta localmente. Las imágenes A4 se empaquetan en un ZIP y el PDF usa las mismas imágenes.', resultTitle: 'Resultado convertido', resultLead: 'Previsualiza localmente y exporta imágenes A4 o un PDF con el estilo After.', before: 'Antes', after: 'Después', productEyebrow: 'Refinar AI Publisher para macOS', productTitle: 'Escribe en Markdown. Exporta como un profesional.', productLead: 'Transforma borradores en PDF terminados con vistas previas mejoradas por IA, diseños basados en plantillas, tablas inteligentes, gráficos, portadas y estilos listos para exportar.', downloadMac: 'Descargar para macOS', subscribe: 'Suscribirse', productMeta: 'Markdown, PDF, tablas, gráficos', demoEyebrow: 'Vista previa del producto Publisher', demoTitle: 'Mira la diferencia entre un borrador y un documento terminado.', demoLead: 'Publisher combina contenido estructurado con diseños controlados, tablas, gráficos, portadas y vistas previas mejoradas por IA.', sourceCaption: 'Contenido estructurado', outputCaption: 'Resultado pulido y listo para exportar', featuresEyebrow: 'Funciones de publicación', featuresTitle: 'Convierte contenido sin formato en un documento diseñado.', feature1Title: 'Markdown a PDF', feature1Body: 'Escribe contenido estructurado y exporta un PDF terminado con las decisiones de diseño aplicadas.', feature2Title: 'Vista previa mejorada por IA', feature2Body: 'Revisa la estructura, los títulos, las tablas y la presentación antes de aplicar los cambios.', feature3Title: 'Tablas y gráficos', feature3Body: 'Convierte tablas sin formato en informes visuales más claros y secciones de datos publicables.', feature4Title: 'Plantillas y portadas', feature4Body: 'Aplica temas, estilos de página y portadas consistentes a informes, guías y propuestas.', screensEyebrow: 'Vista de la interfaz', screensTitle: 'Diseñado para producir documentos listos para exportar.', galleryCaption1: 'Resumen de mejora de IA', galleryCaption2: 'Tendencias de calidad y flujo', galleryCaption3: 'Controles de mejora', galleryCaption4: 'Informe de tablas estructurado', ctaTitle: '¿Listo para publicar mejores documentos?', ctaBody: 'Descarga Publisher para macOS o gestiona tu membresía en línea.', manageMembership: 'Gestionar membresía', officialSite: 'Sitio web oficial', productImageAlt: 'Interfaz de Refine AI Publisher', sourceImageAlt: 'Documento fuente Markdown', outputImageAlt: 'Resultado PDF mejorado', galleryAlt1: 'Resumen de mejora de IA', galleryAlt2: 'Tendencias de calidad', galleryAlt3: 'Controles de mejora', galleryAlt4: 'Informe de tablas'
@@ -966,6 +1081,17 @@
         }
       };
       const languageSelect = document.querySelector('#language-select');
+      const styleNames = {
+        en: { swiss: 'Swiss Grid', academic: 'Academic Paper' },
+        de: { swiss: 'Swiss Grid', academic: 'Akademisches Papier' },
+        es: { swiss: 'Cuadrícula suiza', academic: 'Artículo académico' },
+        fr: { swiss: 'Grille suisse', academic: 'Article académique' },
+        ja: { swiss: 'スイスグリッド', academic: '学術論文' },
+        ko: { swiss: '스위스 그리드', academic: '학술 논문' },
+        'pt-br': { swiss: 'Grade suíça', academic: 'Artigo acadêmico' },
+        'zh-cn': { swiss: '瑞士网格', academic: '学术论文' },
+        'zh-tw': { swiss: '瑞士網格', academic: '學術論文' }
+      };
       const githubSourceNotices = {
         en: 'You provide this URL. The original author remains responsible for the content. No GitHub affiliation, endorsement, or authorization is implied.',
         de: 'Sie stellen diese URL bereit. Für den Inhalt bleibt der ursprüngliche Autor verantwortlich. Eine Verbindung, Unterstützung oder Genehmigung durch GitHub wird nicht vorausgesetzt.',
@@ -1062,6 +1188,9 @@
           const value = copy[selected][element.dataset.i18n] || copy.en[element.dataset.i18n];
           if (value) element.textContent = value;
         });
+        const localizedStyles = styleNames[selected] || styleNames.en;
+        document.querySelector('#style-select option[value="swiss"]').textContent = localizedStyles.swiss;
+        document.querySelector('#style-select option[value="academic"]').textContent = localizedStyles.academic;
         document.querySelectorAll('[data-i18n-alt]').forEach((element) => {
           const value = copy[selected][element.dataset.i18nAlt] || copy.en[element.dataset.i18nAlt];
           if (value) element.alt = value;
