@@ -137,7 +137,8 @@
     .view-tab:hover { border-color: var(--accent); color: var(--accent-dark); }
     .view-tab.active { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-dark); }
     .paper {
-      width: min(100%, 980px); min-height: 1120px; margin: 0 auto; padding: 62px 72px 80px; background: #fff;
+      width: min(100%, 980px); min-height: 0; margin: 0 auto; padding: var(--preview-page-padding, 62px 72px 80px); background: #fff;
+      aspect-ratio: var(--paper-aspect-ratio, 210 / 297);
       color: var(--paper-ink); box-shadow: var(--shadow); transition: background .2s ease, color .2s ease;
     }
     .paper[data-style="modern"] { --paper-ink: #ecf2f8; --paper-muted: #a9b7c7; --paper-line: #304158; --paper-accent: #62d8c1; --paper-soft: #1b2a3d; background: #142033; }
@@ -145,14 +146,14 @@
     .paper[data-style="swiss"], .export-page[data-style="swiss"] { --paper-ink: #171717; --paper-muted: #505050; --paper-line: #d6d6d6; --paper-accent: #e6392f; --paper-soft: #f1f1ef; background: #fff; }
     .paper[data-style="academic"], .export-page[data-style="academic"] { --paper-ink: #27231f; --paper-muted: #665f57; --paper-line: #d9d0c5; --paper-accent: #8c3f2f; --paper-soft: #f3eee7; background: #fbfaf7; }
     .paper[data-style="before"] { --paper-ink: #26333e; --paper-muted: #52606d; --paper-line: #d9dee4; --paper-accent: #71808d; --paper-soft: #f3f5f7; background: #fff; }
-    .paper::before { content: "AFTER  •  REFINED HTML PREVIEW"; display: block; margin-bottom: 35px; color: var(--paper-accent); font-size: 10px; font-weight: 850; letter-spacing: .16em; }
+    .paper::before { content: "AFTER  •  REFINED HTML PREVIEW  •  " attr(data-paper-size); display: block; margin-bottom: 35px; color: var(--paper-accent); font-size: 10px; font-weight: 850; letter-spacing: .16em; }
     .paper[data-view="before"] { box-shadow: 0 12px 32px rgba(25, 37, 49, .09); }
     .paper[data-view="before"]::before { content: "BEFORE  •  SOURCE HTML"; }
     .rendered, .export-rendered { color: var(--paper-ink); }
-    .rendered h1, .export-rendered h1 { max-width: 780px; margin: 0 0 20px; font-size: clamp(30px, 4.5vw, 52px); line-height: 1.02; }
-    .rendered h2, .export-rendered h2 { margin: 42px 0 13px; padding-bottom: 9px; border-bottom: 1px solid var(--paper-line); color: var(--paper-accent); font-size: 24px; }
-    .rendered h3, .export-rendered h3 { margin: 26px 0 9px; font-size: 16px; }
-    .rendered p, .rendered li, .export-rendered p, .export-rendered li { color: var(--paper-muted); font-size: 15px; line-height: 1.62; }
+    .rendered h1, .export-rendered h1 { max-width: 780px; margin: 0 0 20px; font-size: var(--preview-h1-size, clamp(30px, 4.5vw, 52px)); line-height: 1.02; }
+    .rendered h2, .export-rendered h2 { margin: 42px 0 13px; padding-bottom: 9px; border-bottom: 1px solid var(--paper-line); color: var(--paper-accent); font-size: var(--preview-h2-size, 24px); }
+    .rendered h3, .export-rendered h3 { margin: 26px 0 9px; font-size: var(--preview-h3-size, 16px); }
+    .rendered p, .rendered li, .export-rendered p, .export-rendered li { color: var(--paper-muted); font-size: var(--preview-body-size, 15px); line-height: 1.62; }
     .rendered p, .export-rendered p { margin: 0 0 14px; }
     .rendered strong, .export-rendered strong { color: var(--paper-ink); }
     .rendered ul, .rendered ol, .export-rendered ul, .export-rendered ol { padding-left: 22px; }
@@ -161,7 +162,7 @@
     .rendered code, .export-rendered code { padding: 2px 5px; border-radius: 4px; background: var(--paper-soft); color: var(--paper-accent); font-size: .9em; }
     .rendered pre, .export-rendered pre { overflow: auto; padding: 16px; background: var(--paper-soft); border: 1px solid var(--paper-line); border-radius: 6px; }
     .rendered pre code, .export-rendered pre code { padding: 0; background: none; }
-    .rendered table, .export-rendered table { width: 100%; margin: 22px 0; border-collapse: collapse; font-size: 13px; }
+    .rendered table, .export-rendered table { width: 100%; margin: 22px 0; border-collapse: collapse; font-size: var(--preview-table-size, 13px); }
     .rendered th, .export-rendered th { padding: 11px 12px; border-bottom: 2px solid var(--paper-accent); color: var(--paper-ink); text-align: left; }
     .rendered td, .export-rendered td { padding: 11px 12px; border-bottom: 1px solid var(--paper-line); color: var(--paper-muted); }
     .rendered a, .export-rendered a { color: var(--paper-accent); }
@@ -254,22 +255,22 @@
     .error { color: #b42318; }
 
     /* This stage stays in the DOM so html2canvas can capture it, but never appears in the preview. */
-    .export-stage { position: fixed; left: -20000px; top: 0; width: 794px; pointer-events: none; }
+    .export-stage { position: fixed; left: -20000px; top: 0; width: var(--export-page-width, 794px); pointer-events: none; }
     .export-page {
-      width: 794px; height: 1123px; overflow: hidden; padding: 56px 62px 58px; background: #fff; color: var(--paper-ink);
+      width: var(--export-page-width, 794px); height: var(--export-page-height, 1123px); overflow: hidden; padding: var(--export-page-padding, 56px 62px 58px); background: #fff; color: var(--paper-ink);
       box-shadow: none;
     }
     .export-page[data-style="modern"] { --paper-ink: #ecf2f8; --paper-muted: #a9b7c7; --paper-line: #304158; --paper-accent: #62d8c1; --paper-soft: #1b2a3d; background: #142033; }
-    .export-masthead { margin: 0 0 25px; color: var(--paper-accent); font-size: 9px; font-weight: 850; letter-spacing: .14em; }
-    .export-rendered h1 { font-size: 34px; }
-    .export-rendered h2 { margin-top: 30px; font-size: 21px; }
-    .export-rendered h3 { margin-top: 21px; }
-    .export-rendered p, .export-rendered li { font-size: 13px; line-height: 1.52; }
-    .export-rendered p { margin-bottom: 11px; }
-    .export-rendered blockquote { margin: 18px 0; padding: 12px 14px; }
-    .export-rendered table { margin: 16px 0; font-size: 11px; }
-    .export-rendered th, .export-rendered td { padding: 8px 9px; }
-    .export-rendered img { max-height: 560px; object-fit: contain; object-position: left top; }
+    .export-masthead { margin: 0 0 var(--export-masthead-margin, 25px); color: var(--paper-accent); font-size: var(--export-masthead-size, 9px); font-weight: 850; letter-spacing: .14em; }
+    .export-rendered h1 { font-size: var(--export-h1-size, 34px); }
+    .export-rendered h2 { margin-top: var(--export-h2-margin, 30px); font-size: var(--export-h2-size, 21px); }
+    .export-rendered h3 { margin-top: var(--export-h3-margin, 21px); font-size: var(--export-h3-size, 16px); }
+    .export-rendered p, .export-rendered li { font-size: var(--export-body-size, 13px); line-height: 1.52; }
+    .export-rendered p { margin-bottom: var(--export-paragraph-margin, 11px); }
+    .export-rendered blockquote { margin: var(--export-blockquote-margin, 18px) 0; padding: var(--export-blockquote-padding, 12px 14px); }
+    .export-rendered table { margin: var(--export-table-margin, 16px) 0; font-size: var(--export-table-size, 11px); }
+    .export-rendered th, .export-rendered td { padding: var(--export-table-cell-padding, 8px 9px); }
+    .export-rendered img { max-height: var(--export-image-max-height, 560px); object-fit: contain; object-position: left top; }
     .export-rendered .mermaid, .export-rendered .katex-display { break-inside: avoid; page-break-inside: avoid; }
     .export-image-fallback { display: grid; place-items: center; min-height: 100px; border: 1px dashed var(--paper-line); color: var(--paper-muted); font-size: 11px; }
 
@@ -419,16 +420,23 @@
         <option value="swiss" data-i18n="styleSwiss">Swiss Grid</option>
         <option value="academic" data-i18n="styleAcademic">Academic Paper</option>
       </select>
+      <label class="field-label" for="paper-size-select" data-paper-size-label>Paper size</label>
+      <select id="paper-size-select" class="select-control" aria-label="Paper size">
+        <option value="a4">A4</option>
+        <option value="a5">A5</option>
+        <option value="letter">Letter</option>
+        <option value="legal">Legal</option>
+      </select>
       <button id="convert" class="convert" type="button"><span aria-hidden="true">&#9654;</span> <span data-i18n="convert">Convert to HTML preview</span></button>
       <div class="export-actions" aria-label="Local export">
-        <button id="export-images" class="export-button" type="button" data-i18n="downloadImages">Download A4 images</button>
+        <button id="export-images" class="export-button" type="button" data-i18n="downloadImages" data-paper-size-copy>Download A4 images</button>
         <button id="export-pdf" class="export-button" type="button" data-i18n="downloadPdf">Download PDF</button>
       </div>
-      <p class="export-note" data-i18n="exportNote">Exports the After style locally. A4 images are packaged in one ZIP; the PDF uses the same images.</p>
+      <p class="export-note" data-i18n="exportNote" data-paper-size-copy>Exports the After style locally. A4 images are packaged in one ZIP; the PDF uses the same images.</p>
     </aside>
 
     <main class="preview-area">
-      <div class="preview-head"><div><h2 data-i18n="resultTitle">Converted result</h2><p data-i18n="resultLead">Preview locally, then export A4 images or a PDF from the After style.</p></div><span id="preview-meta" class="preview-meta">Ready</span></div>
+      <div class="preview-head"><div><h2 data-i18n="resultTitle">Converted result</h2><p data-i18n="resultLead" data-paper-size-copy>Preview locally, then export A4 images or a PDF from the After style.</p></div><span id="preview-meta" class="preview-meta">Ready</span></div>
       <div class="view-tabs" role="tablist" aria-label="Conversion result view">
         <button type="button" class="view-tab" data-view-tab="before" role="tab" aria-selected="false" data-i18n="before">Before</button>
         <button type="button" class="view-tab active" data-view-tab="after" role="tab" aria-selected="true" data-i18n="after">After</button>
@@ -535,12 +543,58 @@
       const sourceType = document.querySelector('#source-type');
       const urlInput = document.querySelector('#url-input');
       const styleSelect = document.querySelector('#style-select');
+      const paperSizeSelect = document.querySelector('#paper-size-select');
       const exportImagesButton = document.querySelector('#export-images');
       const exportPDFButton = document.querySelector('#export-pdf');
-      const A4_WIDTH_PX = 794;
-      const A4_HEIGHT_PX = 1123;
       const EXPORT_SCALE = 1.5;
+      const PAPER_SIZES = {
+        a4: {
+          id: 'a4', label: 'A4', widthPx: 794, heightPx: 1123, widthPt: 595.276, heightPt: 841.89, aspectRatio: '210 / 297',
+          preview: { padding: '62px 72px 80px', h1: 'clamp(30px, 4.5vw, 52px)', h2: '24px', h3: '16px', body: '15px', table: '13px' },
+          export: { padding: '56px 62px 58px', mastheadSize: '9px', mastheadMargin: '25px', h1: '34px', h2: '21px', h2Margin: '30px', h3: '16px', h3Margin: '21px', body: '13px', paragraphMargin: '11px', blockquoteMargin: '18px', blockquotePadding: '12px 14px', tableMargin: '16px', table: '11px', tableCellPadding: '8px 9px', imageMaxHeight: '560px' }
+        },
+        a5: {
+          id: 'a5', label: 'A5', widthPx: 559, heightPx: 794, widthPt: 419.528, heightPt: 595.276, aspectRatio: '148 / 210',
+          preview: { padding: '48px 50px 58px', h1: 'clamp(26px, 3.8vw, 43px)', h2: '20px', h3: '14px', body: '13px', table: '11px' },
+          export: { padding: '40px 44px 42px', mastheadSize: '8px', mastheadMargin: '18px', h1: '28px', h2: '18px', h2Margin: '24px', h3: '14px', h3Margin: '18px', body: '11px', paragraphMargin: '9px', blockquoteMargin: '14px', blockquotePadding: '9px 11px', tableMargin: '12px', table: '9px', tableCellPadding: '6px 7px', imageMaxHeight: '395px' }
+        },
+        letter: {
+          id: 'letter', label: 'Letter', widthPx: 816, heightPx: 1056, widthPt: 612, heightPt: 792, aspectRatio: '8.5 / 11',
+          preview: { padding: '60px 72px 76px', h1: 'clamp(30px, 4.5vw, 52px)', h2: '24px', h3: '16px', body: '15px', table: '13px' },
+          export: { padding: '56px 64px 54px', mastheadSize: '9px', mastheadMargin: '25px', h1: '34px', h2: '21px', h2Margin: '30px', h3: '16px', h3Margin: '21px', body: '13px', paragraphMargin: '11px', blockquoteMargin: '18px', blockquotePadding: '12px 14px', tableMargin: '16px', table: '11px', tableCellPadding: '8px 9px', imageMaxHeight: '530px' }
+        },
+        legal: {
+          id: 'legal', label: 'Legal', widthPx: 816, heightPx: 1344, widthPt: 612, heightPt: 1008, aspectRatio: '8.5 / 14',
+          preview: { padding: '60px 72px 76px', h1: 'clamp(30px, 4.5vw, 52px)', h2: '24px', h3: '16px', body: '15px', table: '13px' },
+          export: { padding: '56px 64px 56px', mastheadSize: '9px', mastheadMargin: '25px', h1: '34px', h2: '21px', h2Margin: '30px', h3: '16px', h3Margin: '21px', body: '13px', paragraphMargin: '11px', blockquoteMargin: '18px', blockquotePadding: '12px 14px', tableMargin: '16px', table: '11px', tableCellPadding: '8px 9px', imageMaxHeight: '720px' }
+        }
+      };
       let exportInProgress = false;
+
+      function getPaperSpec() {
+        return PAPER_SIZES[paperSizeSelect.value] || PAPER_SIZES.a4;
+      }
+
+      function applyPaperVariables(target, spec, scope) {
+        const settings = spec[scope];
+        const prefix = scope === 'preview' ? '--preview-' : '--export-';
+        const propertyNames = scope === 'preview'
+          ? { padding: 'page-padding', h1: 'h1-size', h2: 'h2-size', h3: 'h3-size', body: 'body-size', table: 'table-size' }
+          : { padding: 'page-padding', mastheadSize: 'masthead-size', mastheadMargin: 'masthead-margin', h1: 'h1-size', h2: 'h2-size', h2Margin: 'h2-margin', h3: 'h3-size', h3Margin: 'h3-margin', body: 'body-size', paragraphMargin: 'paragraph-margin', blockquoteMargin: 'blockquote-margin', blockquotePadding: 'blockquote-padding', tableMargin: 'table-margin', table: 'table-size', tableCellPadding: 'table-cell-padding', imageMaxHeight: 'image-max-height' };
+        Object.entries(settings).forEach(([key, value]) => target.style.setProperty(prefix + propertyNames[key], value));
+      }
+
+      function refreshPaperSizeUI() {
+        const spec = getPaperSpec();
+        paper.dataset.paperSize = spec.label;
+        paper.style.setProperty('--paper-aspect-ratio', spec.aspectRatio);
+        applyPaperVariables(paper, spec, 'preview');
+        document.querySelectorAll('[data-paper-size-copy]').forEach((element) => {
+          const base = element.dataset.paperSizeBase || element.textContent;
+          element.dataset.paperSizeBase = base;
+          element.textContent = base.replace(/A4/g, spec.label);
+        });
+      }
 
       function setStatus(message, isError = false) {
         status.textContent = message;
@@ -742,19 +796,29 @@
         exportInProgress = busy;
         exportImagesButton.disabled = busy;
         exportPDFButton.disabled = busy;
-        exportImagesButton.textContent = busy ? 'Preparing...' : 'Download A4 images';
-        exportPDFButton.textContent = busy ? 'Preparing...' : 'Download PDF';
+        paperSizeSelect.disabled = busy;
+        styleSelect.disabled = busy;
+        if (busy) {
+          exportImagesButton.dataset.idleText = exportImagesButton.textContent;
+          exportPDFButton.dataset.idleText = exportPDFButton.textContent;
+          exportImagesButton.textContent = 'Preparing...';
+          exportPDFButton.textContent = 'Preparing...';
+        } else {
+          exportImagesButton.textContent = exportImagesButton.dataset.idleText || exportImagesButton.textContent;
+          exportPDFButton.textContent = exportPDFButton.dataset.idleText || exportPDFButton.textContent;
+          refreshPaperSizeUI();
+        }
         if (message) setStatus(message);
       }
 
-      function createExportPage(stage, pageNumber) {
+      function createExportPage(stage, pageNumber, spec) {
         const page = document.createElement('section');
         page.className = 'export-page';
         page.dataset.style = styleSelect.value;
         page.setAttribute('aria-hidden', 'true');
         const masthead = document.createElement('div');
         masthead.className = 'export-masthead';
-        masthead.textContent = 'REFINED DOCUMENT  /  ' + String(pageNumber).padStart(2, '0');
+        masthead.textContent = 'REFINED DOCUMENT  /  ' + spec.label + '  /  ' + String(pageNumber).padStart(2, '0');
         const content = document.createElement('article');
         content.className = 'export-rendered';
         page.append(masthead, content);
@@ -766,24 +830,24 @@
         return page.scrollHeight <= page.clientHeight + 1;
       }
 
-      function appendNodeToExport(stage, state, node) {
+      function appendNodeToExport(stage, state, node, spec) {
         const candidate = node.cloneNode(true);
         state.content.append(candidate);
         if (pageFits(state.page)) return state;
         state.content.removeChild(candidate);
-        const nextState = createExportPage(stage, stage.children.length + 1);
+        const nextState = createExportPage(stage, stage.children.length + 1, spec);
         nextState.content.append(node.cloneNode(true));
         return nextState;
       }
 
-      function appendListToExport(stage, state, sourceList) {
+      function appendListToExport(stage, state, sourceList, spec) {
         const sourceItems = [...sourceList.children].filter((node) => node.tagName === 'LI');
-        if (!sourceItems.length) return appendNodeToExport(stage, state, sourceList);
+        if (!sourceItems.length) return appendNodeToExport(stage, state, sourceList, spec);
         let list = sourceList.cloneNode(false);
         state.content.append(list);
         if (!pageFits(state.page) && state.content.children.length > 1) {
           list.remove();
-          state = createExportPage(stage, stage.children.length + 1);
+          state = createExportPage(stage, stage.children.length + 1, spec);
           list = sourceList.cloneNode(false);
           state.content.append(list);
         }
@@ -792,17 +856,17 @@
           list.append(itemClone);
           if (pageFits(state.page)) return;
           itemClone.remove();
-          state = createExportPage(stage, stage.children.length + 1);
+          state = createExportPage(stage, stage.children.length + 1, spec);
           list = sourceList.cloneNode(false);
           state.content.append(list, item.cloneNode(true));
         });
         return state;
       }
 
-      function appendTableToExport(stage, state, sourceTable) {
+      function appendTableToExport(stage, state, sourceTable, spec) {
         const sourceHead = sourceTable.querySelector(':scope > thead');
         const sourceRows = [...sourceTable.querySelectorAll(':scope > tbody > tr')];
-        if (!sourceRows.length) return appendNodeToExport(stage, state, sourceTable);
+        if (!sourceRows.length) return appendNodeToExport(stage, state, sourceTable, spec);
 
         const startTable = () => {
           const table = sourceTable.cloneNode(false);
@@ -811,7 +875,7 @@
           state.content.append(table);
           if (!pageFits(state.page) && state.content.children.length > 1) {
             table.remove();
-            state = createExportPage(stage, stage.children.length + 1);
+            state = createExportPage(stage, stage.children.length + 1, spec);
             return startTable();
           }
           return table;
@@ -824,7 +888,7 @@
           body.append(rowClone);
           if (pageFits(state.page)) return;
           rowClone.remove();
-          state = createExportPage(stage, stage.children.length + 1);
+          state = createExportPage(stage, stage.children.length + 1, spec);
           table = startTable();
           body = table.querySelector('tbody');
           body.append(row.cloneNode(true));
@@ -860,34 +924,37 @@
         await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
       }
 
-      function buildExportStage() {
+      function buildExportStage(spec) {
         const stage = document.createElement('div');
         stage.className = 'export-stage';
+        stage.style.setProperty('--export-page-width', spec.widthPx + 'px');
+        stage.style.setProperty('--export-page-height', spec.heightPx + 'px');
+        applyPaperVariables(stage, spec, 'export');
         document.body.append(stage);
         const template = document.createElement('template');
         template.innerHTML = currentHTML;
-        let state = createExportPage(stage, 1);
+        let state = createExportPage(stage, 1, spec);
         [...template.content.childNodes].forEach((node) => {
           if (node.nodeType === Node.TEXT_NODE && !node.textContent.trim()) return;
           const element = node.nodeType === Node.ELEMENT_NODE ? node : Object.assign(document.createElement('p'), { textContent: node.textContent || '' });
-          if (element.tagName === 'TABLE') state = appendTableToExport(stage, state, element);
-          else if (element.tagName === 'UL' || element.tagName === 'OL') state = appendListToExport(stage, state, element);
-          else state = appendNodeToExport(stage, state, element);
+          if (element.tagName === 'TABLE') state = appendTableToExport(stage, state, element, spec);
+          else if (element.tagName === 'UL' || element.tagName === 'OL') state = appendListToExport(stage, state, element, spec);
+          else state = appendNodeToExport(stage, state, element, spec);
         });
         return stage;
       }
 
-      function capturePage(page) {
+      function capturePage(page, spec) {
         return window.html2canvas(page, {
           backgroundColor: page.dataset.style === 'modern' ? '#142033' : page.dataset.style === 'academic' ? '#fbfaf7' : '#ffffff',
           scale: EXPORT_SCALE,
           useCORS: true,
           allowTaint: false,
           logging: false,
-          width: A4_WIDTH_PX,
-          height: A4_HEIGHT_PX,
-          windowWidth: A4_WIDTH_PX,
-          windowHeight: A4_HEIGHT_PX
+          width: spec.widthPx,
+          height: spec.heightPx,
+          windowWidth: spec.widthPx,
+          windowHeight: spec.heightPx
         });
       }
 
@@ -897,7 +964,7 @@
         });
       }
 
-      async function exportA4(kind) {
+      async function exportDocument(kind) {
         if (exportInProgress) return;
         if (!currentHTML || currentHTML.includes('Loading default Markdown')) {
           setStatus('Convert Markdown before exporting', true);
@@ -908,36 +975,37 @@
           return;
         }
 
+        const spec = getPaperSpec();
         const stem = safeFileStem();
         let stage;
         try {
-          setExportBusy(true, 'Preparing A4 pages locally...');
-          stage = buildExportStage();
+          setExportBusy(true, 'Preparing ' + spec.label + ' pages locally...');
+          stage = buildExportStage(spec);
           await prepareExportResources(stage);
           const pages = [...stage.querySelectorAll('.export-page')];
-          if (pages.length > 60) throw new Error('This document is limited to 60 A4 export pages');
+          if (pages.length > 60) throw new Error('This document is limited to 60 ' + spec.label + ' export pages');
           if (kind === 'images') {
             const zip = new window.JSZip();
             for (let index = 0; index < pages.length; index += 1) {
-              setStatus('Rendering A4 image ' + (index + 1) + ' of ' + pages.length + '...');
-              const blob = await canvasToBlob(await capturePage(pages[index]));
+              setStatus('Rendering ' + spec.label + ' image ' + (index + 1) + ' of ' + pages.length + '...');
+              const blob = await canvasToBlob(await capturePage(pages[index], spec));
               zip.file(stem + '-page-' + String(index + 1).padStart(2, '0') + '.png', blob);
             }
-            setStatus('Packaging ' + pages.length + ' A4 images...');
+            setStatus('Packaging ' + pages.length + ' ' + spec.label + ' images...');
             const archive = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 6 } });
-            downloadBlob(archive, stem + '-a4-images.zip');
+            downloadBlob(archive, stem + '-' + spec.id + '-images.zip');
           } else {
             const pdf = await window.PDFLib.PDFDocument.create();
             for (let index = 0; index < pages.length; index += 1) {
               setStatus('Building PDF page ' + (index + 1) + ' of ' + pages.length + '...');
-              const png = await (await canvasToBlob(await capturePage(pages[index]))).arrayBuffer();
+              const png = await (await canvasToBlob(await capturePage(pages[index], spec))).arrayBuffer();
               const image = await pdf.embedPng(png);
-              const pdfPage = pdf.addPage([595.276, 841.89]);
-              pdfPage.drawImage(image, { x: 0, y: 0, width: 595.276, height: 841.89 });
+              const pdfPage = pdf.addPage([spec.widthPt, spec.heightPt]);
+              pdfPage.drawImage(image, { x: 0, y: 0, width: spec.widthPt, height: spec.heightPt });
             }
-            downloadBlob(new Blob([await pdf.save()], { type: 'application/pdf' }), stem + '.pdf');
+            downloadBlob(new Blob([await pdf.save()], { type: 'application/pdf' }), stem + '-' + spec.id + '.pdf');
           }
-          setStatus('Downloaded ' + pages.length + ' local A4 page' + (pages.length === 1 ? '' : 's'));
+          setStatus('Downloaded ' + pages.length + ' local ' + spec.label + ' page' + (pages.length === 1 ? '' : 's'));
         } catch (error) {
           setStatus(error instanceof Error ? error.message : 'Export failed', true);
         } finally {
@@ -1036,14 +1104,20 @@
         if (sourceType.value === 'text') await convert();
       };
       styleSelect.addEventListener('change', () => { if (currentView === 'after') setView('after'); });
+      paperSizeSelect.addEventListener('change', refreshPaperSizeUI);
+      document.addEventListener('publisher-demo-locale', () => {
+        document.querySelectorAll('[data-paper-size-copy]').forEach((element) => { element.dataset.paperSizeBase = element.textContent; });
+        refreshPaperSizeUI();
+      });
       document.querySelectorAll('[data-view-tab]').forEach((button) => {
         button.addEventListener('click', () => setView(button.dataset.viewTab));
       });
       document.querySelector('#convert').addEventListener('click', convert);
-      exportImagesButton.addEventListener('click', () => exportA4('images'));
-      exportPDFButton.addEventListener('click', () => exportA4('pdf'));
+      exportImagesButton.addEventListener('click', () => exportDocument('images'));
+      exportPDFButton.addEventListener('click', () => exportDocument('pdf'));
       currentHTML = '<p class="empty">Loading default Markdown...</p>';
       rendered.innerHTML = currentHTML;
+      refreshPaperSizeUI();
       setView(currentView);
       setStatus('Loading default Markdown...');
       convert();
@@ -1091,6 +1165,10 @@
         'pt-br': { swiss: 'Grade suíça', academic: 'Artigo acadêmico' },
         'zh-cn': { swiss: '瑞士网格', academic: '学术论文' },
         'zh-tw': { swiss: '瑞士網格', academic: '學術論文' }
+      };
+      const paperSizeLabels = {
+        en: 'Paper size', de: 'Papierformat', es: 'Tamaño de papel', fr: 'Format de papier', ja: '用紙サイズ', ko: '용지 크기',
+        'pt-br': 'Tamanho do papel', 'zh-cn': '纸张尺寸', 'zh-tw': '紙張尺寸'
       };
       const githubSourceNotices = {
         en: 'You provide this URL. The original author remains responsible for the content. No GitHub affiliation, endorsement, or authorization is implied.',
@@ -1191,6 +1269,9 @@
         const localizedStyles = styleNames[selected] || styleNames.en;
         document.querySelector('#style-select option[value="swiss"]').textContent = localizedStyles.swiss;
         document.querySelector('#style-select option[value="academic"]').textContent = localizedStyles.academic;
+        const paperSizeLabel = paperSizeLabels[selected] || paperSizeLabels.en;
+        document.querySelector('[data-paper-size-label]').textContent = paperSizeLabel;
+        document.querySelector('#paper-size-select').setAttribute('aria-label', paperSizeLabel);
         document.querySelectorAll('[data-i18n-alt]').forEach((element) => {
           const value = copy[selected][element.dataset.i18nAlt] || copy.en[element.dataset.i18nAlt];
           if (value) element.alt = value;
@@ -1201,6 +1282,7 @@
         const title = selected === 'zh-cn' ? docsProductCopy.productTitle : copy[selected].productTitle;
         document.title = selected === 'en' ? 'Refine AI Publisher - Markdown to PDF' : `Refine AI Publisher - ${title}`;
         if (persistSelection) localStorage.setItem('refinePublisherDemoLanguageManual', selected);
+        document.dispatchEvent(new CustomEvent('publisher-demo-locale', { detail: selected }));
       }
 
       function applyProductPresentation(locale) {
