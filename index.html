@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Refine AI Publisher - Markdown to PDF Preview</title>
+  <title>Refine AI Markdown Studio</title>
   <link rel="icon" href="assets/favicon.png" type="image/png">
   <style>
     :root {
@@ -115,7 +115,7 @@
     .convert:hover { background: var(--accent-dark); transform: translateY(-1px); }
     .convert:active { transform: translateY(0); }
     .source-status { min-height: 17px; margin-top: 9px; color: var(--success); font-size: 11px; }
-    .export-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+    .export-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
     .export-button {
       min-height: 38px; padding: 0 10px; border: 1px solid var(--line); border-radius: 7px; background: #fff;
       color: var(--ink); font-size: 12px; font-weight: 750;
@@ -274,6 +274,18 @@
     .export-rendered .mermaid, .export-rendered .katex-display { break-inside: avoid; page-break-inside: avoid; }
     .export-image-fallback { display: grid; place-items: center; min-height: 100px; border: 1px dashed var(--paper-line); color: var(--paper-muted); font-size: 11px; }
 
+    /* Text PDF keeps this same pagination stage as semantic HTML for browser printing. */
+    @media print {
+      body.text-pdf-printing { background: #fff !important; }
+      body.text-pdf-printing > :not(.export-stage) { display: none !important; }
+      body.text-pdf-printing .export-stage { position: static !important; left: auto !important; top: auto !important; width: auto !important; }
+      body.text-pdf-printing .export-page {
+        break-after: page; page-break-after: always; margin: 0 !important; box-shadow: none !important;
+        -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      }
+      body.text-pdf-printing .export-page:last-child { break-after: auto; page-break-after: auto; }
+    }
+
     @media (max-width: 860px) {
       .preview-area { padding-top: 26px; }
       .paper { padding: 42px 28px 60px; }
@@ -362,7 +374,7 @@
 </head>
 <body>
   <header class="site-header">
-    <a class="site-logo" href="#tool" aria-label="Refine AI Publisher"><img src="assets/publisher/publisher-app-icon.jpg" alt="Refine AI Publisher"><span>Refine AI Publisher</span></a>
+    <a class="site-logo" href="#tool" aria-label="Refine AI Markdown Studio"><img src="assets/publisher/publisher-app-icon.jpg" alt="Refine AI Markdown Studio"><span data-studio-name>Refine AI Markdown Studio</span></a>
     <nav class="site-nav" aria-label="Primary navigation">
       <button type="button" class="active" data-top-view="tool" data-i18n="navTool">Markdown Tool</button>
       <button type="button" data-top-view="product" data-i18n="navProduct">Product</button>
@@ -385,7 +397,7 @@
     <aside class="control-panel">
       <div class="brand">
         <div class="brand-mark">R</div>
-        <div><strong>Refine AI Publisher</strong><span data-i18n="toolSubtitle">Markdown to PDF preview</span></div>
+        <div><strong data-studio-name>Refine AI Markdown Studio</strong><span data-i18n="toolSubtitle">Markdown to PDF preview</span></div>
       </div>
       <p class="eyebrow" data-i18n="toolEyebrow">Source</p>
       <h1 data-i18n="toolTitle">Turn Markdown into a polished document</h1>
@@ -430,9 +442,11 @@
       <button id="convert" class="convert" type="button"><span aria-hidden="true">&#9654;</span> <span data-i18n="convert">Convert to HTML preview</span></button>
       <div class="export-actions" aria-label="Local export">
         <button id="export-images" class="export-button" type="button" data-i18n="downloadImages" data-paper-size-copy>Download A4 images</button>
-        <button id="export-pdf" class="export-button" type="button" data-i18n="downloadPdf">Download PDF</button>
+        <button id="export-pdf" class="export-button" type="button" data-i18n="downloadPdf">Download image PDF</button>
+        <button id="print-text-pdf" class="export-button" type="button" data-i18n="printTextPdf">Print text PDF</button>
       </div>
       <p class="export-note" data-i18n="exportNote" data-paper-size-copy>Exports the After style locally. A4 images are packaged in one ZIP; the PDF uses the same images.</p>
+      <p class="export-note" data-i18n="textPdfNote">Print text PDF opens the browser print dialog. Choose Save as PDF for searchable and selectable text.</p>
     </aside>
 
     <main class="preview-area">
@@ -546,6 +560,7 @@
       const paperSizeSelect = document.querySelector('#paper-size-select');
       const exportImagesButton = document.querySelector('#export-images');
       const exportPDFButton = document.querySelector('#export-pdf');
+      const printTextPDFButton = document.querySelector('#print-text-pdf');
       const EXPORT_SCALE = 1.5;
       const PAPER_SIZES = {
         a4: {
@@ -796,16 +811,20 @@
         exportInProgress = busy;
         exportImagesButton.disabled = busy;
         exportPDFButton.disabled = busy;
+        printTextPDFButton.disabled = busy;
         paperSizeSelect.disabled = busy;
         styleSelect.disabled = busy;
         if (busy) {
           exportImagesButton.dataset.idleText = exportImagesButton.textContent;
           exportPDFButton.dataset.idleText = exportPDFButton.textContent;
+          printTextPDFButton.dataset.idleText = printTextPDFButton.textContent;
           exportImagesButton.textContent = 'Preparing...';
           exportPDFButton.textContent = 'Preparing...';
+          printTextPDFButton.textContent = 'Preparing...';
         } else {
           exportImagesButton.textContent = exportImagesButton.dataset.idleText || exportImagesButton.textContent;
           exportPDFButton.textContent = exportPDFButton.dataset.idleText || exportPDFButton.textContent;
+          printTextPDFButton.textContent = printTextPDFButton.dataset.idleText || printTextPDFButton.textContent;
           refreshPaperSizeUI();
         }
         if (message) setStatus(message);
@@ -924,6 +943,24 @@
         await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
       }
 
+      async function preparePrintResources(stage) {
+        // Browser printing can use normal image loads. Do not force CORS here,
+        // because text PDF does not capture the page through a canvas.
+        const waits = [...stage.querySelectorAll('img')].map((image) => new Promise((resolve) => {
+          const finish = () => resolve();
+          image.addEventListener('load', finish, { once: true });
+          image.addEventListener('error', () => { makeImageFallback(image); finish(); }, { once: true });
+          if (image.complete) {
+            if (!image.naturalWidth) makeImageFallback(image);
+            finish();
+          }
+          window.setTimeout(finish, 9000);
+        }));
+        await Promise.all(waits);
+        if (document.fonts?.ready) await document.fonts.ready;
+        await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      }
+
       function buildExportStage(spec) {
         const stage = document.createElement('div');
         stage.className = 'export-stage';
@@ -1011,6 +1048,49 @@
         } finally {
           stage?.remove();
           setExportBusy(false);
+        }
+      }
+
+      async function printTextPDF() {
+        if (exportInProgress) return;
+        if (!currentHTML || currentHTML.includes('Loading default Markdown')) {
+          setStatus('Convert Markdown before printing', true);
+          return;
+        }
+
+        const spec = getPaperSpec();
+        let stage;
+        let printStyle;
+        let finished = false;
+        const cleanup = () => {
+          if (finished) return;
+          finished = true;
+          document.body.classList.remove('text-pdf-printing');
+          stage?.remove();
+          printStyle?.remove();
+          setExportBusy(false);
+        };
+
+        try {
+          setExportBusy(true, 'Preparing searchable ' + spec.label + ' pages...');
+          stage = buildExportStage(spec);
+          await preparePrintResources(stage);
+          const pages = [...stage.querySelectorAll('.export-page')];
+          if (pages.length > 60) throw new Error('This document is limited to 60 ' + spec.label + ' export pages');
+
+          printStyle = document.createElement('style');
+          printStyle.textContent = '@page { size: ' + spec.label + '; margin: 0; }';
+          document.head.append(printStyle);
+          document.body.classList.add('text-pdf-printing');
+          window.addEventListener('afterprint', cleanup, { once: true });
+          setStatus('Choose Save as PDF in the browser print dialog to keep searchable text.');
+          window.print();
+          // window.print normally returns after the dialog is closed. Keep a
+          // synchronous fallback for browsers that do not emit afterprint.
+          window.setTimeout(cleanup, 0);
+        } catch (error) {
+          cleanup();
+          setStatus(error instanceof Error ? error.message : 'Text PDF printing failed', true);
         }
       }
 
@@ -1115,6 +1195,7 @@
       document.querySelector('#convert').addEventListener('click', convert);
       exportImagesButton.addEventListener('click', () => exportDocument('images'));
       exportPDFButton.addEventListener('click', () => exportDocument('pdf'));
+      printTextPDFButton.addEventListener('click', printTextPDF);
       currentHTML = '<p class="empty">Loading default Markdown...</p>';
       rendered.innerHTML = currentHTML;
       refreshPaperSizeUI();
@@ -1153,6 +1234,62 @@
         'zh-tw': {
           navTool: 'Markdown 工具', navProduct: '產品', toolSubtitle: 'Markdown 轉 PDF 預覽', toolEyebrow: '來源', toolTitle: '將 Markdown 轉為精美檔案', inputLabel: '輸入', inputUrl: '網址', inputUpload: '上傳 Markdown 檔案', inputText: '撰寫 Markdown', chooseFile: '選擇 Markdown 檔案', urlHint: '使用 Markdown 原始網址。點擊轉換時，GitHub blob 連結會自動轉換。', styleLabel: '增強樣式', styleEditorial: '明亮 - 編輯風格', styleModern: '深色 - 現代報告', styleTechnology: '科技', convert: '轉換為 HTML 預覽', downloadImages: '下載 A4 圖片', downloadPdf: '下載 PDF', exportNote: '增強樣式在本機匯出。A4 圖片會打包為 ZIP，PDF 使用相同圖片。', resultTitle: '轉換結果', resultLead: '在本機預覽，然後從增強樣式匯出 A4 圖片或 PDF。', before: '原始', after: '增強', productEyebrow: 'Refine AI Publisher for macOS', productTitle: '以 Markdown 撰寫，輸出專業品質。', productLead: '透過 AI 預覽、範本式版面、智慧表格、圖表、封面和匯出樣式，將草稿轉換為完成的 PDF。', downloadMac: '下載 macOS 版', subscribe: '訂閱', productMeta: 'Markdown、PDF、表格、圖表', demoEyebrow: 'Publisher 產品預覽', demoTitle: '看見草稿與完成檔案之間的差異。', demoLead: 'Publisher 將結構化來源與可控版面、表格、圖表、封面和 AI 增強預覽結合起來。', sourceCaption: '結構化來源內容', outputCaption: '精美、可匯出的結果', featuresEyebrow: '出版功能', featuresTitle: '將原始內容轉為設計完善的檔案。', feature1Title: 'Markdown 至 PDF', feature1Body: '撰寫結構化內容，套用版面設定，並匯出完成的 PDF。', feature2Title: 'AI 改善預覽', feature2Body: '在套用變更前，檢視改善後的結構、標題、表格和呈現方式。', feature3Title: '表格與圖表', feature3Body: '將原始表格轉成易讀的視覺報告及可出版的資料區塊。', feature4Title: '範本與封面', feature4Body: '為報告、指南和提案套用一致的主題、頁面樣式及封面。', screensEyebrow: '介面預覽', screensTitle: '為可匯出的檔案製作而設計。', galleryCaption1: 'AI 改善概覽', galleryCaption2: '品質趨勢和工作流程', galleryCaption3: '改善控制面板', galleryCaption4: '結構化表格報告', ctaTitle: '準備好製作更好的檔案了嗎？', ctaBody: '下載 macOS 版 Publisher，或在線上管理會員。', manageMembership: '管理會員', officialSite: '官網', productImageAlt: 'Refine AI Publisher 介面', sourceImageAlt: 'Markdown 來源檔案', outputImageAlt: '改善後的 PDF 輸出', galleryAlt1: 'AI 改善概覽', galleryAlt2: '品質趨勢', galleryAlt3: '改善控制面板', galleryAlt4: '表格報告'
         }
+      };
+      Object.assign(copy.en, {
+        downloadPdf: 'Download image PDF',
+        printTextPdf: 'Print text PDF',
+        textPdfNote: 'Print text PDF opens the browser print dialog. Choose Save as PDF for searchable and selectable text.'
+      });
+      Object.assign(copy.de, {
+        downloadPdf: 'Bild-PDF herunterladen',
+        printTextPdf: 'Text-PDF drucken',
+        textPdfNote: 'Text-PDF öffnet den Browser-Druckdialog. Wählen Sie Als PDF sichern für durchsuchbaren und auswählbaren Text.'
+      });
+      Object.assign(copy.es, {
+        downloadPdf: 'Descargar PDF de imagen',
+        printTextPdf: 'Imprimir PDF de texto',
+        textPdfNote: 'El PDF de texto abre el diálogo de impresión del navegador. Elija Guardar como PDF para texto seleccionable y con búsqueda.'
+      });
+      Object.assign(copy.fr, {
+        downloadPdf: 'Télécharger le PDF image',
+        printTextPdf: 'Imprimer le PDF texte',
+        textPdfNote: 'Le PDF texte ouvre la boîte de dialogue d’impression du navigateur. Choisissez Enregistrer au format PDF pour du texte sélectionnable et consultable.'
+      });
+      Object.assign(copy.ja, {
+        downloadPdf: '画像 PDF をダウンロード',
+        printTextPdf: 'テキスト PDF を印刷',
+        textPdfNote: 'テキスト PDF はブラウザの印刷ダイアログを開きます。検索・選択可能な文字を残すには PDF として保存を選択してください。'
+      });
+      Object.assign(copy.ko, {
+        downloadPdf: '이미지 PDF 다운로드',
+        printTextPdf: '텍스트 PDF 인쇄',
+        textPdfNote: '텍스트 PDF는 브라우저 인쇄 대화 상자를 엽니다. 검색 및 선택 가능한 텍스트를 유지하려면 PDF로 저장을 선택하세요.'
+      });
+      Object.assign(copy['pt-br'], {
+        downloadPdf: 'Baixar PDF de imagem',
+        printTextPdf: 'Imprimir PDF de texto',
+        textPdfNote: 'O PDF de texto abre a caixa de impressão do navegador. Escolha Salvar como PDF para obter texto selecionável e pesquisável.'
+      });
+      Object.assign(copy['zh-cn'], {
+        downloadPdf: '下载图片 PDF',
+        printTextPdf: '打印文字 PDF',
+        textPdfNote: '文字 PDF 会打开浏览器打印窗口。请选择“存储为 PDF”，即可保留可搜索和复制的文字。'
+      });
+      Object.assign(copy['zh-tw'], {
+        downloadPdf: '下載圖片 PDF',
+        printTextPdf: '列印文字 PDF',
+        textPdfNote: '文字 PDF 會開啟瀏覽器列印視窗。請選擇「儲存為 PDF」，即可保留可搜尋和複製的文字。'
+      });
+      const studioNames = {
+        en: 'Refine AI Markdown Studio',
+        de: 'Refine AI Markdown-Studio',
+        es: 'Estudio Markdown de Refine AI',
+        fr: 'Studio Markdown Refine AI',
+        ja: 'Refine AI Markdown スタジオ',
+        ko: 'Refine AI Markdown 스튜디오',
+        'pt-br': 'Estúdio Markdown Refine AI',
+        'zh-cn': '飘页文档Markdown 工作台',
+        'zh-tw': '飄頁文件 Markdown 工作台'
       };
       const languageSelect = document.querySelector('#language-select');
       const styleNames = {
@@ -1260,6 +1397,7 @@
 
       function applyLocale(locale, persistSelection = false) {
         const selected = copy[locale] ? locale : 'en';
+        const studioName = studioNames[selected] || studioNames.en;
         document.documentElement.lang = languageNames[selected];
         languageSelect.value = selected;
         document.querySelectorAll('[data-i18n]').forEach((element) => {
@@ -1277,10 +1415,10 @@
           if (value) element.alt = value;
         });
         document.querySelector('#github-source-notice').textContent = githubSourceNotices[selected] || githubSourceNotices.en;
+        document.querySelectorAll('[data-studio-name]').forEach((element) => { element.textContent = studioName; });
         applyProductPresentation(selected);
         window.setLocalizedMarkdownSample?.(selected);
-        const title = selected === 'zh-cn' ? docsProductCopy.productTitle : copy[selected].productTitle;
-        document.title = selected === 'en' ? 'Refine AI Publisher - Markdown to PDF' : `Refine AI Publisher - ${title}`;
+        document.title = studioName;
         if (persistSelection) localStorage.setItem('refinePublisherDemoLanguageManual', selected);
         document.dispatchEvent(new CustomEvent('publisher-demo-locale', { detail: selected }));
       }
@@ -1320,14 +1458,17 @@
       }
 
       function updateHeaderBrand() {
-        const isDocs = activeTopView === 'product' && document.documentElement.lang === 'zh-Hans';
+        const selected = localeAliases[document.documentElement.lang] || document.documentElement.lang || 'en';
+        const isTool = activeTopView === 'tool';
+        const isDocs = !isTool && document.documentElement.lang === 'zh-Hans';
+        const labelText = isTool ? (studioNames[selected] || studioNames.en) : (isDocs ? '飘页文档' : 'Refine AI Publisher');
         const logo = document.querySelector('.site-logo');
         const image = logo.querySelector('img');
         const label = logo.querySelector('span');
         image.src = isDocs ? 'assets/piaoye/piaoye-icon.png' : 'assets/publisher/publisher-app-icon.jpg';
-        image.alt = isDocs ? '飘页文档' : 'Refine AI Publisher';
-        label.textContent = isDocs ? '飘页文档' : 'Refine AI Publisher';
-        logo.setAttribute('aria-label', isDocs ? '飘页文档' : 'Refine AI Publisher');
+        image.alt = labelText;
+        label.textContent = labelText;
+        logo.setAttribute('aria-label', labelText);
       }
 
       function showTopView(view) {
